@@ -75,12 +75,12 @@ WHERE name LIKE "%プリン%";
 SELECT *
 FROM purchases
 WHERE name LIKE "プリン%";
--- nameカラムが「プリン」で始まるデータを全て取得
+-- ↑nameカラムが「プリン」で始まるデータを全て取得
 
 SELECT *
 FROM purchases
 WHERE name LIKE "%プリン";
--- nameカラムが「プリン」で終わるデータを全て取得
+-- ↑nameカラムが「プリン」で終わるデータを全て取得
 
 
 
@@ -125,3 +125,31 @@ FROM purchases
 WHERE category = "食費"
 OR character_name = "にんじゃわんこ";
 -- ↑categoryカラムが「食費」またはcharacter_nameカラムが「にんじゃわんこ」であるデータを取得
+
+
+
+-- ORDER BYとは: データを並び替える際に用いる。「ORDER BY　並べたいカラム名 並べ方(ASCもしくはDESC);」 ※ASC-昇順、DESC-降順
+SELECT *
+FROM purchases
+ORDER BY price DESC;
+-- ↑priceカラムを基準に降順に並び替えたデータを取得
+
+SELECT *
+FROM purchases
+WHERE character_name = "にんじゃわんこ"
+ORDER BY price ASC;
+-- ↑character_nameカラムが「にんじゃわんこ」のデータを取得し、priceカラムを基準に昇順に並び替えたデータを取得
+
+
+
+-- LIMITとは:「最大で何件のデータを取得するか」制限を行う際に用いる。「LIMIT 最大で取得するデータの件数」
+SELECT *
+FROM purchases
+LIMIT 5;
+-- ↑取得結果が「最大5件」となるようにデータを取得
+
+SELECT *
+FROM purchases
+WHERE character_name = "にんじゃわんこ"
+LIMIT 10;
+-- ↑character_nameカラムが「にんじゃわんこ」のデータを取得し、取得結果が「最大10件」となるようにデータを取得
