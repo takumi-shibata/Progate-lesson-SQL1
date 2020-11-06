@@ -58,3 +58,70 @@ SELECT *
 FROM purchases
 WHERE purchased_at <= "2017-08-01";
 -- purchased_atカラムが「2017-08-01以前」のデータを取得
+
+
+
+# 7.LIKE演算子とは: 「=」は完全に一致するデータしか取得できないが「LIKE」を用いることで、「ある文字を含むデータ」を取得する事が出来る
+-- LIKE演算子を用いる際の注意点: 文字列の前後に「%」をつける！
+SELECT *
+FROM purchases
+WHERE name LIKE "%プリン%";
+-- ↑nameカラムが「プリン」という文字列を含むデータを全て取得
+
+
+
+# 8.「%」ワイルドカードを文字列の前後どちらかにのみ置くことも可能!
+--「%」を後ろにのみつけた時に「前の文字列に一致するデータを全て取得」し「%」を前のみつけた時に「後ろの文字列に一致するデータを全て取得」
+SELECT *
+FROM purchases
+WHERE name LIKE "プリン%";
+-- ↑nameカラムが「プリン」で始まるデータを全て取得
+
+SELECT *
+FROM purchases
+WHERE name LIKE "%プリン";
+-- ↑nameカラムが「プリン」で終わるデータを全て取得
+
+
+
+# 9.NOT演算子とは: 「〇〇を含まないデータ」や「〇〇に一致しないデータ」のような否定の条件でデータを取得したい場合は「NOT」を用いる
+SELECT *
+FROM purchases
+WHERE NOT character_name = "にんじゃわんこ";
+-- ↑character_nameカラムが「にんじゃわんこ」でないデータを取得
+
+SELECT *
+FROM purchases
+WHERE NOT name LIKE "%プリン%";
+-- ↑nameカラムが「プリン」を含まないデータを取得
+
+
+
+# 10.NULLとは: データベース上に何も保存されていない場合に「NULL」となる
+-- IS NULLとは: NULLのデータを取得する際に用いる。「カラム名 IS NULL」とすることで、「指定したカラムがNULLであるデータ」を取得することが可能
+-- IS NOT NULLとは: NULLではないデータを取得する際に用いる。「カラム名 IS NOT NULL」とすることで、「指定したカラムがNULLではないデータ」を取得することが可能
+SELECT *
+FROM purchases
+WHERE price IS NULL;
+-- ↑priceカラムがNULLであるデータを取得
+
+SELECT *
+FROM purchases
+WHERE price IS NOT NULL;
+-- ↑priceカラムがNULLでないデータを取得
+
+
+
+# 11.AND演算子とは: WHEREに複数の条件を指定することができる
+-- OR演算子とは: 「WHERE 条件１ OR 条件２」のようにすることで、条件１または条件２のどちらかを満たすデータを検索することができる
+SELECT *
+FROM purchases
+WHERE category = "食費"
+AND character_name = "ひつじ仙人";
+-- ↑categoryカラムが「食費」かつcharacter_nameカラムが「ひつじ仙人」であるデータを取得
+
+SELECT *
+FROM purchases
+WHERE category = "食費"
+OR character_name = "にんじゃわんこ";
+-- ↑categoryカラムが「食費」またはcharacter_nameカラムが「にんじゃわんこ」であるデータを取得
